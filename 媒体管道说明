@@ -1,0 +1,11 @@
+从scrapy.pipelines.images导入ImagesPipeline
+在管道中引入ImagesPipeline，然后可以自己定义管道（管道需要继承ImagesPipeline）
+ImagesPipeline类是继承于FilesPipeline，所以同样的道理可以抓取文件
+在使用媒体管道的时候，需要在项目中设定特殊的细分：
+图片管道：
+    DEFAULT_IMAGES_URLS_FIELD ='image_urls'
+    DEFAULT_IMAGES_RESULT_FIELD ='图像'
+文件管道：
+    DEFAULT_FILES_URLS_FIELD ='file_urls'
+    DEFAULT_FILES_RESULT_FIELD ='文件'
+媒体管道还可以进行重写，详细看源代码
