@@ -1,0 +1,26 @@
+import time, requests, json
+import datetime
+
+"""抓取每日确诊和死亡数据"""
+url = 'https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5&callback=&_=%d'%int(time.time()*1000)
+data = json.loads(requests.get(url=url).json()['data'])
+# print(data)
+# data是一个列表中包含了n个字典
+today_data = data["chinaTotal"]
+print(today_data)
+date = datetime.datetime.now().strftime('%m/%d') #日期
+confirm = today_data['confirm']  #累计确诊
+heal = today_data['heal']  # 累计治愈
+dead = today_data['dead']  # 累计死亡
+nowConfirm = today_data['nowConfirm']  # 现有确诊
+noInfect = today_data['noInfect']  #无症状
+importedCase = today_data['importedCase']  #境外输入
+print(date,":")
+print("累计确诊:",confirm)
+print("累计治愈:",heal)
+print("累计死亡:",dead)
+print("现有确诊:",nowConfirm)
+print("无 症 状:",noInfect)
+print("境外输入:",importedCase)
+
+获取到最新疫情含数据的url，通过改动url上的时间戳来实现每次抓取时候数据的更新
